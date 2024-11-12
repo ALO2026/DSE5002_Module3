@@ -1,10 +1,15 @@
 ---
 title: "Week 3 Exercises"
-author: "HD Sheets"
-date: "10/1/2024"
-output: pdf_document
+Student: Andres Lopez
+date: "11/09/2024"
+output:
+  html_document:
+    df_print: paged
 ---
-
+```{R}
+library(tidyverse)
+library(stringr)
+```
 Please complete all exercises below. You may use any library that we have covered in class UP TO THIS POINT. 
 
 For each function,  show that it works, by using the provided data as a test
@@ -31,10 +36,14 @@ You will probably want to use stringr
 ```{R}
 name_in="Sheets, Dave"
 
-reorder_name<-function(last_first){
-  #your code here
+reorder_name<-function(last_first)
+{
+  newname <-  str_split_fixed(gsub(" ","",last_first),",",2)
+  name_out <-paste(newname[2],newname[1],sep=" ")
+  return(cat(name_out))
 }
 
+reorder_name(name_in)
 
 ```
 
@@ -43,13 +52,11 @@ with three columns,  x, x^2 and the square root of x
 
 ```{R}
 x=c(1,3,5,7,9,11,13)
-
 powers_df<-function(x)
 {
-  
+  powers.df <- data.frame(x,xsqrd=x^2,xsqrt=sqrt(x))
 }
-
-#your code here
+print(powers_df(x))
 
 ```
 
@@ -60,10 +67,43 @@ powers_df<-function(x)
     y=0.5x if x>=0
     
     This is a variant on a relu function as used in some neural networks.
+```{R}
+x=-17
+zero_proximity<-function(x)
+{
+  if(x<0)
+  {
+    y= 0.3*x 
+  }else
+  {
+    y=0.5*x #if x>=0
+  }
+}
+print(zero_proximity(x))
 
+```
 4.) Write a function that takes in a value x and returns the first power of two
 greater than x  (use a While loop)
+```{R}
+x <- 10
 
+power2greaterx<-function(x)
+{
+  i <- 0
+  while (TRUE) 
+  {
+    y=2^i
+    if(y>x)
+    {
+     break
+    }
+     i <- i + 1
+  }
+ y <- (paste("2 ^",i,"= ",y))
+}
+cat(power2greaterx(x))
+
+```
 
 5) Two Sum - Write a function named two_sum()
 
@@ -101,26 +141,49 @@ Only one valid answer exists.
 
 *Use the function seq_along to iterate*
 
-```{r}
-two_sum <- function(nums_vector,target){
-  #your code here
- 
-}
 
-
-
-
+```{R}
 # Test code
 nums_vector <- c(5,7,12,34,6,10,8,9)
 target <- 13
- 
-z=two_sum(nums_vector,target)
-print(z)
-#expected answers
-#[1] 1 7
-#[1] 2 5
-#[1] 5 2
 
+
+two_sum <- function(nums_vector,target)
+{
+
+if(!(length(nums_vector<=104) && length(nums_vector)>=2))
+  {
+    cat("nums_vector length violation - must be 2 <= nums.length <= 104 \n")
+    return(NULL)
+  }
+if(!(nums_vector[which.max(nums_vector)]<=109 && nums_vector[which.min(nums_vector)]>= -109))
+  {
+    cat("vector value violation - must be -109 <= [value] <= 109 \n")
+    return(NULL)
+  }
+if(!((target<=109) && (target>= -109)))
+  {
+    cat("target value violation - must be -109 <= value <= 109 \n")
+    return(NULL)
+  }
+  
+  for(i in seq_along(nums_vector))
+  {
+    nums.length <- length(nums_vector)
+    y <- i
+    while(y<nums.length)
+    {
+      nums <- nums_vector[i]+nums_vector[y+1]
+      if(nums==target)
+      {
+        sums <- c(which(nums_vector==nums_vector[i]),which(nums_vector==nums_vector[y+1]))
+        print(sums)
+      }
+      y=y+1
+    }
+  }
+}
+two_sum(nums_vector,target)
 ```
 
 6.) Write one piece of code that will use a regex command to extract a phone
@@ -142,6 +205,25 @@ use the same regex search pattern from each
 a="Please call me at 456-123-2329, asap"
 b="Hey, we have a code 234 on machine a-234-12, call me at 678-321-98766"
 c="On 12-23-2022, Joe over at 122 Turnpike, dialled 912-835-4756, tell me by 9:02 pm Wed"
+
+pattern <- "\\d{3}\\b-\\d+-\\b\\d{4}"
+# ## Match data from regexpr()
+ma <- regexpr(pattern, a)
+mb <- regexpr(pattern, b)
+mc <- regexpr(pattern, c)
+
+print("Printing using RegEx commands...")
+regmatches(a, ma)
+regmatches(b, mb)
+regmatches(c, mc)
+print("Printing using Stringr commands...")
+str_extract(a,"\\d{3}\\b-\\d+-\\b\\d{4}")
+str_extract(b,"\\d{3}\\b-\\d+-\\b\\d{4}")
+str_extract(c,"\\d{3}\\b-\\d+-\\b\\d{4}")
+cat("-\\\\d matches any digit","")
+cat("- specify a repeated number of specific characters by using:","\n"," \\D{x} where x is a number of how many specific repeated characters - e.g. ","\n")
+str_extract(a,"\\D{3}")
+
 ```
 
 7.)  For lines below,  extract the domains (ie the part of the address after @)
@@ -151,5 +233,10 @@ d="jimmy.halibut@gmail.com"
 e="His address is:  c.brown@hopeles.org, do write him"
 f="h.potter@hogwarts.edu is bouncing back on me, I wonder why?"
 
+gsub("@","",str_extract(d,"@\\D{1,}\\.\\D{1,3}"))
+gsub("@","",str_extract(e,"@\\D{1,}\\.\\D{1,3}"))
+gsub("@","",str_extract(f,"@\\D{1,}\\.\\D{1,3}"))
 ```
+
+
 

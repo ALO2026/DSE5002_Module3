@@ -1,7 +1,7 @@
 ---
 title: "PairProgamming_Loops"
-author: "HDS"
-date: "2024-06-24"
+Student: Andres Lopez"
+date: "2024-07-24"
 output:
   html_document:
     df_print: paged

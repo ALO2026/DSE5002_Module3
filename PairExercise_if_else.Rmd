@@ -1,7 +1,7 @@
 ---
 title: "PairProgramming_If_else"
-author: "HDS"
-date: "2024-06-24"
+Student: "Andy Lopez"
+date: "2024-07-24"
 output: html_document
 ---
 
@@ -16,7 +16,7 @@ knitr::opts_chunk$set(echo = TRUE)
 when the test condition in an if statement is met, then the following
 code block is run.   Otherwise, not
 
-if(condiction)
+if(condition)
 {
    ...put some commands here
 }
@@ -28,9 +28,10 @@ This looks like
 ```{R}
 y=0
 z=0
-x=5
+x=5 
 
-if(x<10)
+
+if(x>=10)# changed to x>=10
 {
   y=0.125*x
   z=x^2
@@ -56,10 +57,12 @@ y=0
 z=0
 x=5
 
+
 if(x<10)
 {
   y=0.125*x
   z=x^2
+ 
 }else
 {
   y=0.25*x
@@ -68,10 +71,34 @@ if(x<10)
 #cat is a print function I am using here, the \n is a linefeed character
 # to advance to the next line in the printing
 
+cat(" When 'x'<10, if 'x'= ",x,"\n")
+cat("Y is ",y ,"\n")
+cat("Z is ",z,"\n")
+```
+```{R}
+y=0
+z=0
+x=10
+
+
+if(x<10)
+{
+  y=0.125*x
+  z=x^2
+ 
+}else
+{
+  y=0.25*x
+  z=x^(0.5)
+}
+#cat is a print function I am using here, the \n is a linefeed character
+# to advance to the next line in the printing
+
+cat("when 'x' >= 10",x,"\n")
 cat("Y is ",y ,"\n")
 cat("Z is ",z)
-
 ```
+
 ## *Action Required:*
 
 Verify that this code works for a couple of different values of x
@@ -83,12 +110,16 @@ Each if statement can only have one else
 We can put if statements inside elses to allow for more possible options
 
 ```{R}
-x=-1
+
+x=18
+print("change == to !=1")
+print(" %% will equal always equal remainder 1 when diveded by 2 and odd")
+print(" can also change to %/% where remainder is always 0 if even, but %% is easiest to use for less complex statement")
 if(x<0)
 {
   cat("Negative X value\n")
 }else
-{if(x%%2==1)
+{if(x%%2!=1)
   {
     cat("X is even\n")
   }
@@ -96,7 +127,7 @@ if(x<0)
   {
     cat("X is odd\n")
   }
-  }
+}
 ```
 
 Alter this code and verify that it works
@@ -123,10 +154,15 @@ Set up an if statement that prints out the decision
 
 ```{R}
 people_in_line=3
-scones_in_stock=TRUE
+scones_in_stock=FALSE
 
-# write your code here
-
+if((people_in_line <= 2)|(people_in_line <= 4 && scones_in_stock))
+{ 
+  cat("I'll stop by Starbucks\n")
+}else
+{
+    cat("I won't stop by Starbucks\n")
+}
 
 ```
 
@@ -140,9 +176,14 @@ second for FALSE
 it might look like this
 
 ```{R}
-x=5
+x=9
 y=ifelse(x<10,0.125*x,0.25*x)
-y
+cat("verifies 1st condition! y=",y,"\n")
+
+
+x=y*10
+z=ifelse(x<10,0.125*x,0.25*x)
+cat("verifies 2nd condition! z=",z)
 ```
 
 ## *Action: Verify that this behaves as expected when x is changed*

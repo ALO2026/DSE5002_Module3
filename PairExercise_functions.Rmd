@@ -1,7 +1,7 @@
 ---
 title: "PairExercise_Functions"
-author: "HDS"
-date: "2024-06-24"
+Student: "Andres Lopez"
+date: "2024-07-24"
 output: html_document
 ---
 
@@ -63,6 +63,7 @@ x2power<-function(x,n)
   y=x^n
   return(y)
 }
+
 ```
 
 We use a function by calling it
@@ -75,7 +76,16 @@ x2power(3,2)
 
 Write your self a function that takes in three variables, a, b, and c
 and returns (a+b)/c
-
+```{R}
+cmpdiv<-function(a,b,c)
+{
+  # this is the function cmpdiv, that divides compound addition variables 
+  
+  y=(a+b)/c
+  return(y)
+}
+cmpdiv(2,4,3)
+```
 
 ## Default values
 
@@ -150,7 +160,28 @@ Add some basic error trapping to the function you wrote.
 Make sure c is not zero
 
 ```{R}
-
+cmpdiv<-function(a,b,c)
+{
+  # this is the function cmpdiv, that divides compound addition variables 
+  if(!is.numeric(a))
+  {
+    cat("Please enter only numeric values of a \n")
+    return(NULL)
+  }
+  if(!is.numeric(b))
+  {
+    cat("Please enter only numeric values of b \n")
+    return(NULL)
+  }
+  if(c==0)
+  {
+    cat("Please enter only numeric values greater than or less than 0 for c \n")
+    return(NULL)
+  }
+  y=(a+b)/c
+  return(y)
+}
+cmpdiv(2,4,0)
 ```
 
 ## Do you really have to write extensive error trapping?

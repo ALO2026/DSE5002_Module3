@@ -1,7 +1,7 @@
 ---
 title: "Regular Expressions (Regex)"
-author: "HD Sheets" 
-date: "2024-10-01"
+Student: "Andres_Lopez" 
+date: "2024-07-11"
 output: html_document
 ---
 
@@ -49,6 +49,10 @@ str_view(fruit,"berry")
 ## *Question/Action*
 
 try this with apple and star
+```{R}
+str_view(fruit,"apple")
+str_view(fruit,"star")
+```
 
 # combinations and wild cards
 
